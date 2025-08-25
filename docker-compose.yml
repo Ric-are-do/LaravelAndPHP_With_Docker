@@ -9,7 +9,16 @@ services:
     - "./nginx/nginx.conf:/etc/nginx/nginx.conf:ro"
 
   php:
-#  mysql:
+    build:
+     context : ./DockerFiles  # the folder where to find this file in
+     dockerfile: php.dockerfile  # this is how I let compose know about which docker file im running for this service 
+     volumes : 
+      - "./src:/var/www/html:delegated" # mounting our src from our machine to the var/www/html folder in our container , note we adding the :delegated to the end , this is for performance
+     ports:
+       - "3000:9000"
+
+  mysql:
+    image: "mysql:5.7"
 #  composer:
 #  artisan:
 #  npm:
