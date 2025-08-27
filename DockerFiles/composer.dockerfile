@@ -1,7 +1,11 @@
 FROM composer:latest
 
-#This is where the code in the container will be stored 
+#newly added for laravel
+RUN addgroup -g 1000 laravel && adduser -G laravel -g laravel -s /bin/sh -D laravel
 
+
+
+#This is where the code in the container will be stored 
 WORKDIR /var/www/html
 
 # here we add the composer so that when we run the container we can use composer commands
